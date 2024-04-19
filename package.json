@@ -1,0 +1,31 @@
+{
+  "name": "just-eat",
+  "version": "1.0.0",
+  "description": "Food Delivery App",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harishrao1/React_Practice.git"
+  },
+  "author": "HarishRao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harishrao1/React_Practice/issues"
+  },
+  "homepage": "https://github.com/harishrao1/React_Practice#readme",
+  "devDependencies": {
+    "parcel": "^2.9.1",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.3.3"
+  },
+  "dependencies": {
+    "postcss": "^8.4.28",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.2"
+  }
+}
