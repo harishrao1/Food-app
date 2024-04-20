@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-
 const useRestaurant = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
@@ -17,7 +16,7 @@ const useRestaurant = () => {
     try {
       const { lat, lng } = UserLocation;
       const response = await fetch(
-        `http://localhost:3000/api/restaurants?lat=${lat}&lng=${lng}`
+        `https://food-app-server-4ke7.onrender.com/api/restaurants?lat=${lat}&lng=${lng}`
       );
       if (!response.ok) {
         const err = response.status;

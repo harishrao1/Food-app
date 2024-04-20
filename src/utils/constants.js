@@ -1,8 +1,8 @@
 const CORSPROXY = "https://proxy.cors.sh/";
 
-export const LOCATION_API = `http://localhost:3000/location?input=`;
+export const LOCATION_API = `https://food-app-server-4ke7.onrender.com/location?input=`;
 
-export const ADDRESS_API = `http://localhost:3000/addresses?place_id=`;
+export const ADDRESS_API = `https://food-app-server-4ke7.onrender.com/addresses?place_id=`;
 
 export const LOGO_URL =
   "https://img.freepik.com/premium-vector/restaurant-logo-design-template_79169-56.jpg?w=740";
