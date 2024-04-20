@@ -37,7 +37,7 @@ const Header = () => {
               to="/"
               className="hidden ml-4 text-lg text-black uppercase cursor-pointer font-ProximaNovaBold xl:block"
             >
-              Food Kitchen
+              Food App
             </Link>
             {UserLocation?.address && (
               <button

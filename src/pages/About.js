@@ -12,7 +12,7 @@ const About = () => {
         </div>
         <div className="text-center md:text-left">
           <h2 className="mb-2 text-2xl md:mb-6 font-GrontBlack md:text-4xl">
-            🍽️ Food Kitchen🍴
+            🍽️ Food App
           </h2>
         </div>
       </div>

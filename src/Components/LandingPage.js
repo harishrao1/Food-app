@@ -73,7 +73,7 @@ const LandingPage = () => {
                 className="h-[60px] rounded-full border border-black"
               />
               <span className="text-xl uppercase cursor-pointer sm:text-2xl font-ProximaNovaBold">
-                Food Kitchen
+                Food App
               </span>
             </div>
             <div className="mt-10 mb-4">
