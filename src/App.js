@@ -1,19 +1,32 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
 import Header from "./Components/Header";
-import Body from "./Components/Body";
-import Error from "./Components/Error";
-import Contact from "./Components/Contact";
 import RestaurantMenu from "./Components/RestaurantMenu";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
-import About from "./Components/About";
+import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
+import LandingPage from "./Components/LandingPage";
+import Footer from "./Components/Footer";
+import Home from "./pages/Home";
+import About from "./pages/About";
 
 const App = () => {
+  const UserLocation = useSelector((store) => store.locationData.userLocation);
   return (
-    <React.Fragment>
-      <Header />
-      <Outlet />
-    </React.Fragment>
+    <>
+      {UserLocation && <Header />}
+      <Routes>
+        {UserLocation ? (
+          <>
+            <Route path="/" element={<Home />} />
+            <Route path="/restuarant/:resId" element={<RestaurantMenu />} />
+            <Route path="/cart" element="" />
+            <Route path="/about" element={<About />} />
+          </>
+        ) : (
+          <Route path="/" element={<LandingPage />} />
+        )}
+      </Routes>
+      <Footer />
+    </>
   );
 };
 export default App;

@@ -2,7 +2,7 @@ import React from "react";
 import { Banner_img_CDN, RES_img_CDN } from "../config";
 const Banners = ({ data }) => {
   return (
-    <div className="row">
+    <div className="row" style={{display : "none"}}>
       {data?.map((pak, index) => {
         return (
           <div key={pak.id} className="image-class-container">
@@ -11,6 +11,7 @@ const Banners = ({ data }) => {
                 className="image-class"
                 src={Banner_img_CDN + pak.imageId}
                 alt={pak.entityType}
+                loading="lazy"
               />
             </div>
           </div>

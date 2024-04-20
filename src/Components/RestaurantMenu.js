@@ -30,21 +30,20 @@ const RestaurantMenu = () => {
 
   const { cards } = restaurant;
   const itemCards =
-    cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
+    cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card.card
       ?.itemCards ||
     cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
       ?.itemCards ||
     [];
-  // console.log(itemCards);
 
   const {
-    name,
-    cloudinaryImageId,
-    cuisines,
-    sla,
-    avgRating,
-    costForTwoMessage,
-  } = cards[0]?.card?.card?.info || {};
+    name = "",
+    cloudinaryImageId = "",
+    cuisines = [],
+    sla = "",
+    avgRating = 0,
+    costForTwoMessage = "",
+  } = cards[2]?.card?.card?.info || {};
   return (
     <div className="restaurant-menu">
       <div className="restaurant-summary">
