@@ -7,7 +7,9 @@ import LandingPage from "./Components/LandingPage";
 import Footer from "./Components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Cart from "./pages/Cart"
+import Cart from "./pages/Cart";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 const App = () => {
   const UserLocation = useSelector((store) => store.locationData.userLocation);
   return (
@@ -17,6 +19,8 @@ const App = () => {
         {UserLocation ? (
           <>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Register />} />
             <Route path="/restaurants/:resId" element={<RestaurantMenu />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/about" element={<About />} />
