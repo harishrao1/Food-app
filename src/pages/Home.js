@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import RestaurantCard, {
   RestaurantCardOffer,
 } from "../Components/RestaurantCard";
+import ShimmerUi from "../Components/ShimmerUi";
 // import Unserviceable_location from "../assets/images/location_unserviceable.webp";
 
 const Home = () => {
@@ -24,6 +25,91 @@ const Home = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const UserLocation = useSelector((store) => store.locationData.userLocation);
   const ModalOpen = useSelector((store) => store.toggleData.isModalOpen);
+  const handleOffer = () => {
+    setFilteredRestaurants(
+      AllRestaurants.filter((res) => res.info.aggregatedDiscountInfoV3)
+    );
+  };
+
+  const handleFastDelivery = () => {
+    setFilteredRestaurants(
+      AllRestaurants.filter((res) => res?.info?.sla?.deliveryTime < 30)
+    );
+  };
+
+  const handleTopRated = () => {
+    setFilteredRestaurants(
+      AllRestaurants.filter((res) => res?.info?.avgRating > 4.0)
+    );
+  };
+
+  const handleSearch = () => {
+    if (searchText !== "") {
+      const filteredData = AllRestaurants.filter((res) =>
+        res?.info?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
+      );
+      setFilteredRestaurants(filteredData);
+      setErrorMessage("");
+      if (filteredData?.length === 0) {
+        setErrorMessage(
+          `Sorry, we couldn't find any results for "${SearchText}"`
+        );
+      }
+    } else {
+      setErrorMessage("");
+      setFilteredRestaurants(AllRestaurants);
+    }
+  };
+
+  const handleRange300to600 = () => {
+    let lowRange = "300";
+    let highRange = "600";
+    const filterPrice = AllRestaurants.filter((res) => {
+      const price = res?.info?.costForTwo?.substring(1, 4);
+      if (price >= lowRange && price <= highRange) {
+        return price;
+      }
+    });
+    setFilteredRestaurants(filterPrice);
+  };
+
+  const handleRangelessThan300 = () => {
+    let range = "300";
+    const filterPrice = AllRestaurants.filter((res) => {
+      const price = res?.info?.costForTwo?.substring(1, 4);
+      if (price <= range) {
+        return price;
+      }
+    });
+    setFilteredRestaurants(filterPrice);
+  };
+
+  const handleScrollBannerLeft = () => {
+    const bannerCategory = document.querySelector(".bannerCategory");
+    bannerCategory.scrollLeft = bannerCategory.scrollLeft - 250;
+  };
+
+  const handleScrollBannerRight = () => {
+    const bannerCategory = document.querySelector(".bannerCategory");
+    bannerCategory.scrollLeft = bannerCategory.scrollLeft + 250;
+  };
+
+  const handleScrollLeft = () => {
+    const foodCategory = document.querySelector(".foodCategory");
+    foodCategory.scrollLeft = foodCategory.scrollLeft - 250;
+  };
+
+  const handleScrollRight = () => {
+    const foodCategory = document.querySelector(".foodCategory");
+    foodCategory.scrollLeft = foodCategory.scrollLeft + 250;
+  };
+
+  const RestaurantCardwithOffer = RestaurantCardOffer(RestaurantCard);
+
+  if (allRestaurants?.length === 0 && filteredRestaurants?.length === 0) {
+    return <ShimmerUi />;
+  }
+
   return (
     <>
       {ModalOpen && true}
@@ -240,7 +326,7 @@ const Home = () => {
               />
             </div>
             <h2 className="text-xl leading-6 text-center font-GrotBlack text-customblack-1">
-              Location Unserviceable 
+              Location Unserviceable
             </h2>
             <p className="mt-2 mb-2 ml-8 mr-8 leading-5 tracking-tight font-GrotMed text-customblack-2">
               We don’t have any services here till now. Try changing location.

@@ -72,7 +72,7 @@ const RestaurantCard = (props) => {
 
 export const RestaurantCardOffer = (props) => {
   const { resInfo } = props;
-  const { isOpen } = resInfo;
+  const { isOpen } = resInfo|| {};
   
   return (
     <>
