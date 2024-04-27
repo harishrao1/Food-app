@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import RestaurantCard, {
   RestaurantCardOffer,
 } from "../Components/RestaurantCard";
+// import Unserviceable_location from "../assets/images/location_unserviceable.webp";
 
 const Home = () => {
   const [
@@ -232,7 +233,7 @@ const Home = () => {
             <div className="mt-16 ml-auto mr-auto mb-7">
               <img
                 className="block mx-auto"
-                src="/images/location_unserviceable.webp"
+                src={""}
                 alt="service_unavailable"
                 width={238}
                 height={238}

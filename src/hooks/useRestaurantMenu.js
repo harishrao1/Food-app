@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useRestaurantMenu = () => {
+const useRestaurantMenu = (resId, MENU_API, lat, lng) => {
   const [resInfo, setResInfo] = useState({});
   const [resMenuInfo, setResMenuInfo] = useState([]);
   useEffect(() => {
@@ -8,7 +8,9 @@ const useRestaurantMenu = () => {
   }, []);
   const fetchRestaurants = async () => {
     try {
-      const response = await fetch(MENI_API + resId);
+      const response = await fetch(
+        `${MENU_API}?lat=${lat}&lng=${lng}&restaurantId=${resId}`
+      );
       if (!response.ok) {
         const err = response.status;
         throw new Error(err);
@@ -21,8 +23,9 @@ const useRestaurantMenu = () => {
           ?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
             (item) => item?.card?.card["@type"] === RestaurantType
           );
-        setResInfo(json?.data?.cards[0]?.card?.card?.info);
+        setResInfo(json?.data?.cards[2]?.card?.card?.info);
         setResMenuInfo(RestaurantMenuData);
+        console.log(RestaurantMenuData)
       }
     } catch (error) {
       console.log(error);

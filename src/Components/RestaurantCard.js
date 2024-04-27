@@ -1,4 +1,5 @@
 import { RES_img_CDN } from "../config";
+import StarImage from "../assets/images/star-icon.png"
 const RestaurantCard = (props) => {
   const { resInfo } = props;
   const {
@@ -45,7 +46,7 @@ const RestaurantCard = (props) => {
       {avgRating ? (
         <div className="flex items-center gap-1">
           <div>
-            <img src="/images/star-icon.png" alt="star-icon" />
+            <img src={StarImage} alt="star-icon" />
           </div>
 
           <div>

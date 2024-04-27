@@ -1,106 +1,170 @@
-import { useEffect, useState } from "react";
-import { RES_img_CDN, GET_RESTAURANT_MENU, ITEM_IMG_CDN } from "../config";
-import { useParams } from "react-router-dom";
-import Shimmer from "./Shimmer";
-import "./RestaurantMenu.css";
+import { useState } from "react";
+import { MENU_API } from "../utils/constants";
+import { Link, useParams } from "react-router-dom";
+import RestaurantCategory from "./RestaurantCategory";
+import ShimmerMenu from "./ShimmerMenu";
+import { useSelector } from "react-redux";
+import { IoLocationOutline } from "react-icons/io5";
+import Modal from "./Modal";
+import useRestaurantMenu from "../hooks/useRestaurantMenu";
+import StarIcon from "../assets/images/star-icon.png"
 const RestaurantMenu = () => {
   const { resId } = useParams();
-  const [restaurant, setRestaurant] = useState(null);
+  const UserLocation = useSelector((store) => store.locationData.userLocation);
+  const { lat, lng } = UserLocation || {};
+  const [ResInfo, setResInfo, ResMenuInfo, setResMenuInfo] = useRestaurantMenu(
+    resId,
+    MENU_API,
+    lat,
+    lng
+  );
+  const [ShowIndex, setShowIndex] = useState(0);
+  const ModalOpen = useSelector((store) => store.toggleData.isModalOpen);
 
-  useEffect(() => {
-    getRestaurantInfo();
-  }, []);
-
-  const getRestaurantInfo = async () => {
-    try {
-      const response = await fetch(GET_RESTAURANT_MENU + resId);
-      const json = await response.json();
-      // console.log(json.data);
-      setRestaurant(json.data);
-      // console.log(restaurant);s
-      // restaurant Data
-    } catch (error) {
-      console.log(error);
+  const handleShowItem = (currInd) => {
+    if (currInd === ShowIndex) {
+      setShowIndex(null);
+    } else {
+      setShowIndex(currInd);
     }
   };
-  // console.log(restaurant);
-  if (restaurant === null) {
-    return <Shimmer />;
-  }
-
-  const { cards } = restaurant;
-  const itemCards =
-    cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card.card
-      ?.itemCards ||
-    cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
-      ?.itemCards ||
-    [];
 
   const {
-    name = "",
-    cloudinaryImageId = "",
-    cuisines = [],
-    sla = "",
-    avgRating = 0,
-    costForTwoMessage = "",
-  } = cards[2]?.card?.card?.info || {};
+    name,
+    city,
+    areaName,
+    cuisines,
+    avgRating,
+    totalRatingsString,
+    isOpen,
+  } = ResInfo || {};
+
+  if (ResMenuInfo?.length === 0) {
+    return <ShimmerMenu />;
+  }
+
   return (
-    <div className="restaurant-menu">
-      <div className="restaurant-summary">
-        <img
-          className="restaurant-img"
-          src={RES_img_CDN + cloudinaryImageId}
-          alt={name}
-        />
-        <div className="restaurant-summary-details">
-          <h2 className="restaurant-title">{name}</h2>
-          <p className="restaurant-tags">{cuisines.join(", ")}</p>
-          <div className="restaurant-details">
-            <div className="restaurant-rating">
-              <span>{avgRating}</span>
+    <div className="w-full min-h-screen px-3 mx-auto 2xl:w-6/12 menu-container pt-28 pb-36 md:w-10/12">
+      {ModalOpen && <Modal />}
+
+      {/* BreadCrumb */}
+      <div className="flex mb-5" aria-label="Breadcrumb">
+        <ol className="inline-flex items-center space-x-1 md:space-x-2">
+          <li className="inline-flex items-center">
+            <Link
+              to="/"
+              className="inline-flex items-center text-sm font-medium text-customblack-1 hover:text-black"
+            >
+              Home
+            </Link>
+          </li>
+          <li aria-current="page">
+            <div className="flex items-center">
+              <svg
+                className="w-3 h-3 mx-1 text-customblack-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 6 10"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 9 4-4-4-4"
+                />
+              </svg>
+              <Link
+                to={`/`}
+                className="ml-1 mr-1 text-sm font-medium md:mr-2 text-customblack-1 hover:text-black md:ml-2"
+              >
+                {city}
+              </Link>
+              <svg
+                className="w-3 h-3 mx-1 text-customblack-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 6 10"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 9 4-4-4-4"
+                />
+              </svg>
+              <Link
+                to={`/restaurants/${resId}`}
+                className="ml-1 text-sm font-medium text-customblack-1 hover:text-black md:ml-2"
+              >
+                {name}
+              </Link>
             </div>
-            <div>|</div>
-            <div>{sla.slaString}</div>
-            <div>|</div>
-            <div>{costForTwoMessage}</div>
-          </div>
-        </div>
+          </li>
+        </ol>
       </div>
 
-      <div className="restaurant-menu-content">
-        <div className="menu-items-container">
-          <div className="menu-title-wrap">
-            <h3 className="menu-title">Recommended</h3>
-            <p className="menu-count">{itemCards?.length} ITEMS</p>
-          </div>
-          <div className="menu-items-list">
-            {itemCards.map((item) => (
-              <div key={item.card.info.id} className="menu-item">
-                <div className="menu-item-details">
-                  <h3 className="item-title">{item?.card?.info?.name}</h3>
-                  <p className="item-cost">
-                    ₹
-                    {(item?.card?.info?.price ||
-                      item?.card?.info?.defaultPrice) / 100}
-                  </p>
-                  <p className="item-desc">{item?.card?.info?.description}</p>
-                </div>
-                <div className="menu-img-wrapper">
-                  {item?.card?.info?.showImage && (
-                    <img
-                      className="menu-item-img"
-                      src={RES_img_CDN + item?.card?.info?.imageId}
-                      alt={item?.card?.info?.name}
-                    />
-                  )}
-                  <button className="add-btn">ADD +</button>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* Restaurant Name */}
+      <div className="flex items-start justify-between pt-5 mb-6">
+        <div>
+          <h2 className="mb-1 capitalize text-customcolor-6 sm:text-xl font-ProximaNovaSemiBold">
+            {name}
+          </h2>
+          <p className="text-sm text-customcolor-5 font-ProximaNovaThin">
+            {cuisines?.join(", ")}
+          </p>
+          <p className="flex items-center gap-1 text-sm font-bold text-customcolor-5 font-ProximaNovaThin">
+            <span>
+              <IoLocationOutline />
+            </span>{" "}
+            <span>
+              {areaName}, {city}
+            </span>
+          </p>
         </div>
+        {avgRating && (
+          <div>
+            <button className="p-[8px] cursor-pointer rounded resRating">
+              <div className="flex items-center gap-1 justify-center avgRating pb-[10px] mb-[8px]">
+                <img src={StarIcon} alt="star-img" />
+                <span className="text-sm font-ProximaNovaSemiBold">
+                  {avgRating}
+                </span>
+              </div>
+              <span className="text-xs tracking-tight font-ProximaNovaSemiBold totalRatings">
+                {totalRatingsString}
+              </span>
+            </button>
+          </div>
+        )}
       </div>
+      {!isOpen ? (
+        <h2 className="text-base resMsg font-ProximaNovaThin">
+          Uh-oh! The outlet is not accepting orders at the moment. We&apos;re
+          working to get them back online
+        </h2>
+      ) : (
+        <>
+          <div className="dottedDivider"></div>
+          {/* Restaurant Category */}
+          <ul>
+            {ResMenuInfo?.map((category, index) => (
+              <li key={category?.card?.card?.title}>
+                <RestaurantCategory
+                  data={category?.card?.card}
+                  ShowItem={index === ShowIndex ? true : false}
+                  handleShowItem={() => handleShowItem(index)}
+                />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 };
+
 export default RestaurantMenu;

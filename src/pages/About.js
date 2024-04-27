@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import AboutImage from "../../public/images/about-page.jpg"
+import AboutImage from "../assets/images/about-page.jpg"
 const About = () => {
   const ModalOpen = useSelector((store) => store.toggleData.isModalOpen);
 
