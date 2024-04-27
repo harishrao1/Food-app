@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import useRestaurant from "../hooks/useRestaurant";
-import { useSelector } from "react-redux";
-import { CATEGORY_IMG } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { CATEGORY_IMG, IMG_CAROUSEL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import RestaurantCard, {
   RestaurantCardOffer,
 } from "../Components/RestaurantCard";
 import ShimmerUi from "../Components/ShimmerUi";
-// import Unserviceable_location from "../assets/images/location_unserviceable.webp";
 
 const Home = () => {
   const [
@@ -27,44 +26,44 @@ const Home = () => {
   const ModalOpen = useSelector((store) => store.toggleData.isModalOpen);
   const handleOffer = () => {
     setFilteredRestaurants(
-      AllRestaurants.filter((res) => res.info.aggregatedDiscountInfoV3)
+      allRestaurants.filter((res) => res.info.aggregatedDiscountInfoV3)
     );
   };
 
   const handleFastDelivery = () => {
     setFilteredRestaurants(
-      AllRestaurants.filter((res) => res?.info?.sla?.deliveryTime < 30)
+      allRestaurants.filter((res) => res?.info?.sla?.deliveryTime < 30)
     );
   };
 
   const handleTopRated = () => {
     setFilteredRestaurants(
-      AllRestaurants.filter((res) => res?.info?.avgRating > 4.0)
+      allRestaurants.filter((res) => res?.info?.avgRating > 4.0)
     );
   };
 
   const handleSearch = () => {
     if (searchText !== "") {
-      const filteredData = AllRestaurants.filter((res) =>
+      const filteredData = allRestaurants.filter((res) =>
         res?.info?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
       );
       setFilteredRestaurants(filteredData);
       setErrorMessage("");
       if (filteredData?.length === 0) {
         setErrorMessage(
-          `Sorry, we couldn't find any results for "${SearchText}"`
+          `Sorry, we couldn't find any results for "${searchText}"`
         );
       }
     } else {
       setErrorMessage("");
-      setFilteredRestaurants(AllRestaurants);
+      setFilteredRestaurants(allRestaurants);
     }
   };
 
   const handleRange300to600 = () => {
     let lowRange = "300";
     let highRange = "600";
-    const filterPrice = AllRestaurants.filter((res) => {
+    const filterPrice = allRestaurants.filter((res) => {
       const price = res?.info?.costForTwo?.substring(1, 4);
       if (price >= lowRange && price <= highRange) {
         return price;
@@ -75,7 +74,7 @@ const Home = () => {
 
   const handleRangelessThan300 = () => {
     let range = "300";
-    const filterPrice = AllRestaurants.filter((res) => {
+    const filterPrice = allRestaurants.filter((res) => {
       const price = res?.info?.costForTwo?.substring(1, 4);
       if (price <= range) {
         return price;
@@ -123,7 +122,7 @@ const Home = () => {
                 </h2>
                 <div className="absolute flex gap-2 scroll-buttons top-5 2xl:right-26 right-4">
                   <button
-                    // onClick={handleScrollBannerLeft}
+                    onClick={handleScrollBannerLeft}
                     className="flex justify-center text-white transition cursor-pointer scroll-left hover:ring-2 hover:ring-gray-400 hover:ring-offset-1"
                   >
                     <svg
@@ -143,7 +142,7 @@ const Home = () => {
                     </svg>
                   </button>
                   <button
-                    // onClick={handleScrollBannerRight}
+                    onClick={handleScrollBannerRight}
                     className="flex justify-center transition cursor-pointer scroll-right hover:ring-2 hover:ring-gray-400 hover:ring-offset-1"
                   >
                     <svg
@@ -188,7 +187,7 @@ const Home = () => {
                 </h2>
                 <div className="absolute flex gap-2 scroll-buttons top-5 2xl:right-26 right-4">
                   <button
-                    // onClick={handleScrollLeft}
+                    onClick={handleScrollLeft}
                     className="flex justify-center text-white transition cursor-pointer scroll-left hover:ring-2 hover:ring-gray-400 hover:ring-offset-1"
                   >
                     <svg
@@ -208,7 +207,7 @@ const Home = () => {
                     </svg>
                   </button>
                   <button
-                    // onClick={handleScrollRight}
+                    onClick={handleScrollRight}
                     className="flex justify-center transition cursor-pointer scroll-right hover:ring-2 hover:ring-gray-400 hover:ring-offset-1"
                   >
                     <svg
@@ -252,31 +251,31 @@ const Home = () => {
               <div className="flex flex-wrap items-center justify-center gap-3 md:flex-nowrap md:justify-start">
                 <button
                   className="filterBtn text-sm md:text-[15px] hover:ring-2 hover:ring-gray-200 hover:ring-offset-2"
-                  // onClick={handleTopRated}
+                  onClick={handleTopRated}
                 >
                   Ratings 4.0+
                 </button>
                 <button
                   className="filterBtn text-sm md:text-[15px] hover:ring-2 hover:ring-gray-200 hover:ring-offset-2"
-                  // onClick={handleFastDelivery}
+                  onClick={handleFastDelivery}
                 >
                   Fast Delivery
                 </button>
                 <button
                   className="filterBtn text-sm md:text-[15px] hover:ring-2 hover:ring-gray-200 hover:ring-offset-2"
-                  // onClick={handleOffer}
+                  onClick={handleOffer}
                 >
                   Offers
                 </button>
                 <button
                   className="filterBtn text-sm md:text-[15px] hover:ring-2 hover:ring-gray-200 hover:ring-offset-2"
-                  // onClick={handleRange300to600}
+                  onClick={handleRange300to600}
                 >
                   ₹300 - ₹600
                 </button>
                 <button
                   className="filterBtn text-sm md:text-[15px] hover:ring-2 hover:ring-gray-200 hover:ring-offset-2"
-                  // onClick={handleRangelessThan300}
+                  onClick={handleRangelessThan300}
                 >
                   Less than ₹300
                 </button>
@@ -284,9 +283,9 @@ const Home = () => {
               <div className="flex items-center pl-0 2xl:pl-0 xl:pl-32">
                 <input
                   type="text"
-                  // onChange={(e) => setSearchText(e.target.value)}
-                  // value={SearchText}
-                  // onKeyUp={handleSearch}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  value={searchText}
+                  onKeyUp={handleSearch}
                   className="filterBtn text-sm md:text-[15px] searchInput focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2"
                   placeholder="Search Restaurant.."
                 />
