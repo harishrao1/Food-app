@@ -240,7 +240,7 @@ const Home = () => {
               />
             </div>
             <h2 className="text-xl leading-6 text-center font-GrotBlack text-customblack-1">
-              Location Unserviceable
+              Location Unserviceable 
             </h2>
             <p className="mt-2 mb-2 ml-8 mr-8 leading-5 tracking-tight font-GrotMed text-customblack-2">
               We don’t have any services here till now. Try changing location.
