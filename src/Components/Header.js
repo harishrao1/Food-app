@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="p-3 shadow-lg fixed w-full z-10 bg-orange-200 h-[60px]">
+      <header className="p-3 shadow-lg fixed w-full z-10 bg-green-100 h-[60px]">
         <nav className="flex items-center justify-between mx-auto">
           <div className="flex items-center">
             <Link to="/">
