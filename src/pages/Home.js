@@ -112,7 +112,7 @@ const Home = () => {
   return (
     <>
       {ModalOpen && true}
-      <div className="container px-4  min-h-screen pt-24 pb-32 mx-auto">
+      <div className="px-4  min-h-screen pt-24 pb-32 mx-auto">
         {filteredRestaurants && allRestaurants ? (
           <>
             {bannerInfo && (
@@ -163,7 +163,7 @@ const Home = () => {
                   </button>
                 </div>
 
-                <div className="bannerCategory overflow-x-scroll overflow-y-hidden scroll-smooth scrollbar-hide 2xl:max-w-[1500px]">
+                <div className="bannerCategory overflow-x-scroll overflow-y-hidden scroll-smooth scrollbar-hide">
                   <div className="flex px-3 md:gap-6 md:px-0">
                     {bannerInfo?.map((imgCard) => (
                       <div key={imgCard.id} className="cursor-pointer">
@@ -227,7 +227,7 @@ const Home = () => {
                     </svg>
                   </button>
                 </div>
-                <div className="foodCategory overflow-x-scroll overflow-y-hidden scroll-smooth scrollbar-hide 2xl:max-w-[1500px]">
+                <div className="foodCategory overflow-x-scroll overflow-y-hidden scroll-smooth scrollbar-hide">
                   <div className="flex px-3 md:gap-6 md:px-0">
                     {foodCategory?.map((category) => (
                       <div key={category?.id} className="cursor-pointer">

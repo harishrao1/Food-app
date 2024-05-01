@@ -70,11 +70,8 @@ const LandingPage = () => {
               <img
                 src={LOGO_URL}
                 alt="img"
-                className="h-[60px] rounded-full border border-black"
+                className="h-[60px] rounded-full"
               />
-              <span className="text-xl uppercase cursor-pointer sm:text-2xl font-ProximaNovaBold">
-                Food App
-              </span>
             </div>
             <div className="mt-10 mb-4">
               <h2 className="font-ProximaNovaSemiBold text-3xl text-white lg:text-[#282c3f]">

@@ -5,5 +5,5 @@ module.exports = {
     darkMode: "media",
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tailwindcss"), require("autoprefixer")],
 };

@@ -23,27 +23,21 @@ const Header = () => {
 
   return (
     <>
-      <header className="p-3 shadow-lg fixed w-full z-10 bg-white h-[85px]">
-        <nav className="container flex items-center justify-between mx-auto">
+      <header className="p-3 shadow-lg fixed w-full z-10 bg-orange-200 h-[60px]">
+        <nav className="flex items-center justify-between mx-auto">
           <div className="flex items-center">
             <Link to="/">
               <img
                 src={LOGO_URL}
                 alt="logo"
-                className="h-[60px] rounded-full border border-black"
+                className="h-[40px] rounded-full"
               />
-            </Link>
-            <Link
-              to="/"
-              className="hidden ml-4 text-lg text-black uppercase cursor-pointer font-ProximaNovaBold xl:block"
-            >
-              Food App
             </Link>
             {UserLocation?.address && (
               <button
                 type="button"
                 className="hidden xl:block text-sm ml-2 sm:ml-5 cursor-pointer text-[#686b78] hover:text-black transition font-ProximaNovaThin w-2/4 sm:w-auto text-center"
-                onClick={handleModal}
+                onClick={() => handleModal()}
               >
                 {UserLocation?.address}
               </button>
