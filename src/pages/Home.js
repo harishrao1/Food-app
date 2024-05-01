@@ -296,7 +296,7 @@ const Home = () => {
                 {errorMessage}
               </div>
             )}
-            <div className="flex flex-wrap items-center justify-center gap-10 2xl:justify-start">
+            <div className="flex flex-wrap items-center justify-center gap-10 2xl:justify-around">
               {filteredRestaurants?.map((res) => (
                 <Link
                   key={res?.info?.id}
