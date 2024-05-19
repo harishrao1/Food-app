@@ -107,6 +107,11 @@ const Header = () => {
                 <span className="text-base font-ProximaNovaMed">Cart</span>
               </Link>
             </li>
+            <li>
+              <Link to="/login" className="transition hover:text-black">
+                Login
+              </Link>
+            </li>
           </ul>
 
           <div

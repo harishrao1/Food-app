@@ -67,11 +67,7 @@ const LandingPage = () => {
           />
           <div className="relative 2xl:w-4/5">
             <div className="flex items-center gap-3 text-white lg:text-black">
-              <img
-                src={LOGO_URL}
-                alt="img"
-                className="h-[60px] rounded-full"
-              />
+              <img src={LOGO_URL} alt="img" className="h-[60px] rounded-full" />
             </div>
             <div className="mt-10 mb-4">
               <h2 className="font-ProximaNovaSemiBold text-3xl text-white lg:text-[#282c3f]">
