@@ -15,18 +15,20 @@ export const ITEM_IMG_CDN =
 export const GET_RESTAURANT_LIST =
   // "https://foodfire.onrender.com/api/restaurants?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"; // Mumbai
 
-// "https://foodfire.onrender.com/api/restaurants?lat=16.5061743&lng=80.6480153&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"; // Vijaywada
+  // "https://foodfire.onrender.com/api/restaurants?lat=16.5061743&lng=80.6480153&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"; // Vijaywada
 
-// "https://foodfire.onrender.com/api/restaurants?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"; // Mumbai
+  // "https://foodfire.onrender.com/api/restaurants?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"; // Mumbai
 
-// "https://foodfire.onrender.com/api/restaurants?lat=18.5642452&lng=73.7768511&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"; // Pune
+  // "https://foodfire.onrender.com/api/restaurants?lat=18.5642452&lng=73.7768511&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"; // Pune
 
-"https://foodfire.onrender.com/api/restaurants?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"; // Hyderabad
+  "https://foodfire.onrender.com/api/restaurants?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"; // Hyderabad
 
 // "https://foodfire.onrender.com/api/restaurants?lat=18.5296617&lng=73.8422739&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
 export const GET_RESTAURANT_MENU =
   "https://foodfire.onrender.com/api/menu?page-type=REGULAR_MENU&complete-menu=true&lat=18.5296617&lng=73.8422739&&submitAction=ENTER&restaurantId=";
+
+// const a = https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.52110&lng=73.85020&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null
 
 export const SHIMMER_RES_CARDS_COUNT = 10;
 export const SHIMMER_MENU_ITEM_COUNT = 4;
